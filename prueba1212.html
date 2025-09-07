@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Catálogo de Gimar Pasteleria y Repostería artesanal">
+  <title>Catálogo Gimar – Pasteleria & Repostería</title>
+  <link rel="icon" href="imagen/logo-gimar.svg" type="image/svg+xml">
+
+
+  <style>
+
+   :root {
+      --primary: #8b2c34;
+      --secondary: #f8d7da;
+      --bg: #fff9f9;
+      --text: #333;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(139,44,52,0.95);
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      z-index: 1000;
+      transition: background .3s ease;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover { color: var(--secondary); }
+
+    header {
+      background: var(--secondary);
+      text-align: center;
+      padding: 6rem 1rem 2.5rem;
+    }
+    header img { width: 160px; height: auto; display:block; margin: 0 auto 10px; }
+    header h1 { color: var(--primary); margin: .2rem 0 0; font-size: 2.3rem; }
+    header p { margin: .2rem 0 0; color: #555; }
+
+    .section {
+      max-width: 1200px;
+      padding: 3rem 1.25rem;
+      margin: 0 auto;
+    }
+    .section h2 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--secondary);
+      display: inline-block;
+      padding-bottom: .4rem;
+    }
+
+    /* Grid */
+   /* Sección tortas */
+.section .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  padding: 20px;
+}
+
+.section .card {
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.section .card:hover {
+  transform: scale(1.05);
+}
+
+.section .card img {
+  display: block;
+  width: 100%;
+  max-width: 220px;   /* ancho uniforme */
+  height: 180px;      /* alto fijo */
+  object-fit: cover;  /* recorta la imagen para que no se deforme */
+  border-radius: 8px;
+  margin: 0 auto 10px auto;
+}
+
+.section h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #333;
+}
+
+    /* Slider */
+    .slider {
+      position: relative;
+      max-width: 100%;
+      margin: 1rem auto 0;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 6px 14px rgba(0,0,0,.12);
+    }
+    .slides { display: flex; transition: transform 0.5s ease-in-out; }
+    .slide { min-width: 100%;
+     display: flex;
+  justify-content: center; 
+  align-items: center;   }
+    .slide img { 
+        max-width: 90%;    
+  max-height: 400px;  
+        object-fit: contain; display: block; }
+    .prev, .next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,.45); color: #fff; border: none;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items:center; cursor: pointer;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* Dots indicators */
+    .dots {
+      text-align: center;
+      margin-top: .5rem;
+    }
+    .dot {
+      display: inline-block;
+      width: 12px; height: 12px;
+      margin: 0 4px;
+      background: #bbb;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background .3s ease;
+    }
+    .dot.active { background: var(--primary); }
+
+    footer {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+    footer p { margin: .25rem 0; }
+
+    /* Floating buttons */
+    .floating-btns {
+      position: fixed; right: 16px; bottom: 18px; display:flex; flex-direction:column; gap:12px; z-index: 1500;
+    }
+    .floating-btns a {
+      width: 58px; height: 58px; border-radius: 50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 6px 14px rgba(0,0,0,.25);
+      animation: pulse 2s infinite;
+    }
+    .floating-btns svg { width: 30px; height: 30px; fill: #fff; }
+    .whatsapp { background:#25D366; }
+    .instagram { background:#E4405F; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 640px) {
+      .card img { aspect-ratio: 1; }
+      .slide img { aspect-ratio: 1.7; }
+      header { padding-top: 5.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#tortas">Tortas</a>
+    <a href="#budines">Budines</a>
+    <a href="#tartas">Tartas</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#pascuas">Pascuas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <header>
+    <img src="imagen/logo-gimar.svg" alt="Logo Gimar">
+    <h1>Gimar</h1>
+    <p>Pasteleria & Repostería Artesanal</p>
+  </header>
+
+  <section id="tortas" class="section">
+    <h2>Tortas</h2>
+    <div class="grid">
+      <!-- Ejemplo de card -->
+      <div class="card"><img src="torta-frutilla-reina.webp" alt="Torta Frutilla Reina"><h3>Torta Frutilla Reina</h3></div>
+      <div class="card"><img src="torta-nuez.webp" alt="Torta de Nuez"><h3>Torta de Nuez</h3></div>
+      <div class="card"><img src="torta-pantera-rosa.webp" alt="Torta Pantera Rosa"><h3>Torta Pantera Rosa</h3></div>
+      <div class="card"><img src="torta-block.webp" alt="Torta Block"><h3>Torta Block</h3></div>
+      <div class="card"><img src="torta-cumpleanos.webp" alt="Torta Cumpleaños"><h3>Torta Cumpleaños</h3></div>
+      <div class="card"><img src="chocotorta.webp" alt="Chocotorta"><h3>Chocotorta</h3></div>
+      <div class="card"><img src="torta-tematica.webp" alt="Torta Temática"><h3>Torta Temática</h3></div>
+      <div class="card"><img src="torta-pisos.webp" alt="Torta de Pisos"><h3>Torta de Pisos</h3></div>
+      <div class="card"><img src="torta-animal-print.webp" alt="Torta Animal Print"><h3>Torta Animal Print</h3></div>
+      <div class="card"><img src="file:///C:/Users/arian/Desktop/Torta/(8)%20Instagramnn_files/budines/tortas/torta-nevada.webp" alt="Torta Nevada"><h3>Torta Nevada</h3></div>
+      <div class="card"><img src="file:///C:/Users/arian/Desktop/Torta/(8)%20Instagramnn_files/budines/tortas/torta-tematica-boca.webp" alt="Torta Tematica Boca"><h3>Torta Temática Boca</h3></div>
+      <div class="card"><img src="file:///C:/Users/arian/Desktop/Torta/(8)%20Instagramnn_files/budines/tortas/torta-pedido.webp" alt="Torta-pedido"><h3>Torta por pedido</h3></div>
+      <div class="card"><img src="file:///C:/Users/arian/Desktop/Torta/(8)%20Instagramnn_files/budines/tortas/torta-horoscopo.webp" alt="Torta Horoscopo"><h3>Torta Horóscopo</h3></div>
+      <div class="card"><img src="file:///C:/Users/arian/Desktop/Torta/(8)%20Instagramnn_files/budines/tortas/torta-blanca.webp" alt="Torta Blanca"><h3>Torta Blanca</h3></div>
+    </div>
+  </section>
+
+  <section id="budines" class="section">
+    <h2>Budines</h2>
+    <div class="grid">
+      <div class="card"><img src="budines/20250328_160949 (1).webp" alt="Budin"><h3>Budin</h3></div>
+      <div class="card"><img src="budines/20250410_152119.webp" alt="Budin 1"><h3>Budin 1</h3></div>
+      <div class="card"><img src="budines/20250410_152227 (1).webp" alt="Budin 2"><h3>Budin 2</h3></div>
+      <div class="card"><img src="budines/20250412_104535.webp" alt="Budin 3"><h3>Budin 3</h3></div>
+      <div class="card"><img src="budines/20250412_104602.webp" alt="Budin 4"><h3>Budin 4</h3></div>
+      <div class="card"><img src="budines/20250412_105941.webp" alt="Budin 5"><h3>Budin 5</h3></div>
+      <div class="card"><img src="budines/20250412_105944 (1).webp" alt="Budin 6"><h3>Budin 6</h3></div>
+      <div class="card"><img src="budines/20250412_105953.webp" alt="Budin 7"><h3>Budin 7</h3></div>
+      <div class="card"><img src="budines/IMG-20250410-WA0152 (2).webp" alt="Budin 8"><h3>Budin 8</h3></div>
+      <div class="card"><img src="budines/IMG-20250410-WA0153.webp" alt="Budin 9"><h3>Budin 9</h3></div>
+      <div class="card"><img src="budines/IMG-20250410-WA0154.webp" alt="Budin 10"><h3>Budin 10</h3></div>
+    </div>
+  </section>
+
+  <section id="tartas" class="section">
+    <h2>Tartas</h2>
+    <div class="grid">
+      <div class="card"><img src="tartas/Lemon pie.webp" alt="Lemon Pie"><h3>Lemon Pie</h3></div>
+      <div class="card"><img src="tartas/Pastafrola.webp" alt="Pastafrola"><h3>Pastafrola</h3></div>
+      <div class="card"><img src="tartas/Tarta block.webp" alt="Tarta Block"><h3>Tarta Block</h3></div>
+      <div class="card"><img src="tartas/Tarta bon o bon blanco entera.webp" alt="Tarta Bon O Bon Blanco Entera"><h3>Tarta Bon O Bon Blanco Entera</h3></div>
+      <div class="card"><img src="tartas/Tarta bon o bon blanco.webp" alt="Tarta Bon O Bon Blanco"><h3>Tarta Bon O Bon Blanco</h3></div>
+      <div class="card"><img src="tartas/Tarta bon o bon entera.webp" alt="Tarta Bon O Bon Entera"><h3>Tarta Bon O Bon Entera</h3></div>
+      <div class="card"><img src="tartas/Tarta bon o bon.webp" alt="Tarta Bon O Bon"><h3>Tarta Bon O Bon</h3></div>
+      <div class="card"><img src="tartas/Tarta ricota.webp" alt="Tarta Ricota"><h3>Tarta Ricota</h3></div>
+      <div class="card"><img src="tartas/Tarta tofee.webp" alt="Tarta Tofee"><h3>Tarta Tofee</h3></div>
+    </div>
+  </section>
+
+  <section id="eventos" class="section">
+    <h2>Servicios para Eventos</h2>
+    <div class="slider" id="sliderEventos">
+      <div class="slides">
+        <div class="slide"><img src="eventos/Alfajor relleno de malbec.webp" alt="Alfajor Relleno de Malbec"></div>
+        <div class="slide"><img src="eventos/Alfajores chocolate marmolado.webp" alt="Alfajores Chocolate Marmolado"></div>
+        <div class="slide"><img src="eventos/Alfajores matilda.webp" alt="Alfajores Matilda"></div>
+        <div class="slide"><img src="eventos/Alfajores rellenos.webp" alt="Alfajores Rellenos"></div>
+        <div class="slide"><img src="eventos/Brownie mini.webp" alt="Brownie Mini"></div>
+        <div class="slide"><img src="eventos/Cake pop.webp" alt="Cake Pop"></div>
+        <div class="slide"><img src="eventos/Chocolates.webp" alt="Chocolates"></div>
+        <div class="slide"><img src="eventos/Cookies new york rellenas de bon o bon.webp" alt="Cookies New York Rellenas de Bon O Bon"></div>
+        <div class="slide"><img src="eventos/Cookies new york.webp" alt="Cookies New York"></div>
+        <div class="slide"><img src="eventos/Mini postres.webp" alt="Mini Postres"></div>
+        <div class="slide"><img src="eventos/Torta brownie con hilo nutella.webp" alt="Torta Brownie con Hilo Nutella"></div>
+        <div class="slide"><img src="eventos/Torta brownie.webp" alt="Torta Brownie"></div>
+      </div>
+      <button class="prev" onclick="prevSlide('sliderEventos')" aria-label="Anterior">❮</button>
+      <button class="next" onclick="nextSlide('sliderEventos')" aria-label="Siguiente">❯</button>
+      <div class="dots" id="dots-sliderEventos"></div>
+    </div>
+  </section>
+<section id="pascuas" class="section"> 
+  <h2>Sección Especial Pascuas</h2>
+  <div class="slider" id="sliderPascuas">
+    <div class="slides">
+      <div class="slide">
+        <img src="seccion-especial-pascuas/conejo-de-chocolate.webp" alt="Conejo de Chocolate">
+      </div>
+      <div class="slide">
+        <img src="seccion-especial-pascuas/huevo-pascua1.webp" alt="Huevo de Pascua 1">
+      </div>
+      <div class="slide">
+        <img src="seccion-especial-pascuas/huevo-relleno-oreo.webp" alt="Huevo relleno de Oreo">
+      </div>
+      <div class="slide">
+        <img src="seccion-especial-pascuas/huevo-relleno-de-chocotorta.webp" alt="Huevo relleno de chocotorta">
+      </div>
+      <div class="slide">
+        <img src="seccion-especial-pascuas/huevo-relleno-de-chocotorta2.webp" alt="Huevo relleno de chocotorta2">
+      </div>
+      <div class="slide">
+        <img src="seccion-especial-pascuas/huevos-rellenos2.webp" alt="Huevo rellenos2">
+      </div>
+      <div class="slide">
+        <img src="seccion-especial-pascuas/huevos-rellenos.webp" alt="Huevos rellenos">
+      </div>
+      </div>  
+    <button class="prev" onclick="prevSlide('sliderPascuas')" aria-label="Anterior">❮</button>
+    <button class="next" onclick="nextSlide('sliderPascuas')" aria-label="Siguiente">❯</button>
+    <div class="dots" id="dots-sliderPascuas"></div>
+  </div>
+</section>
+<style>
+/* 🎨 Estilos del slider */
+#pascuas {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff8f0;
+}
+
+.slider-container {
+  position: relative;
+  max-width: 900px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+  border-radius: 15px;
+}
+
+/* Botones de control */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 22px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.prev:hover, .next:hover {
+  background: #ffd6a5;
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+</style>
+
+<script>
+/* 🔄 Funcionalidad del slider */
+const wrapper = document.querySelector("#pascuas .slider-wrapper");
+const slides = document.querySelectorAll("#pascuas .slide");
+const prevBtn = document.querySelector("#pascuas .prev");
+const nextBtn = document.querySelector("#pascuas .next");
+
+let index = 0;
+
+function showSlide(i) {
+  if (i >= slides.length) index = 0;
+  else if (i < 0) index = slides.length - 1;
+  else index = i;
+  wrapper.style.transform = `translateX(${-index * 100}%)`;
+}
+
+prevBtn.addEventListener("click", () => showSlide(index - 1));
+nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+// 🔄 Reproducción automática
+setInterval(() => {
+  showSlide(index + 1);
+}, 4000);
+</script>
+
+  <footer id="contacto">
+    <p>📍 Dirección: Las Toninas</p>
+    <p>📱 WhatsApp: 1139496500</p>
+    <p>📧 Email: gastaldigabriela19@gmail.com</p>
+    <p>📷 Instagram: @gimar.56</p>
+  </footer>
+
+  <div class="floating-btns">
+    <a href="https://wa.me/541139496500" target="_blank" class="whatsapp" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path d="M16 .4C7.5.4.6 7.3.6 15.8c0 2.8.8 5.6 2.3 8L.6 31.6l8.1-2.1c2.3 1.3 4.9 2 7.6 2 8.5 0 15.4-6.9 15.4-15.4C31.7 7.3 24.8.4 16 .4zm0 28.1c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.8 1.3 1.3-4.7-.3-.5c-1.4-2.2-2.2-4.8-2.2-7.5 0-7.6 6.2-13.7 13.8-13.7s13.8 6.2 13.8 13.7c0 7.6-6.2 13.8-13.8 13.8zm7.5-10.4c-.4-.2-2.3-1.1-2.7-1.2-.4-.2-.6-.2-.9.2-.3.4-1 .2-1.2.1-.3-.1-.9-.3-1.7-.9-.6-.5-1-1.1-1.1-1.3-.2-.4 0-.6.2-.7.2-.2.4-.4.5-.6.2-.2.3-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.9-2.2-1.2-3-.3-.8-.6-.7-.9-.7h-.8c-.2 0-.6.1-1 .4-.3.4-1.3 1.3-1.3 3.2 0 1.9 1.4 3.8 1.6 4.1.2.2 2.7 4.2 6.6 5.8.9.4 1.6.7 2.1.9.9.3 1.7.3 2.3.2.7-.1 2.3-.9 2.6-1.7.3-.8.3-1.5.2-1.7-.2-.2-.4-.3-.8-.5z"/>
+      </svg>
+    </a>
+    <a href="https://www.instagram.com/gimar.56/" target="_blank" class="instagram" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path d="M16 7.3c2.4 0 2.7 0 3.7.1 1 .1 1.6.2 2 .4.5.2.8.4 1.2.8.3.3.6.7.8 1.2.2.4.3 1 .4 2 .1 1 .1 1.3.1 3.7s0 2.7-.1 3.7c-.1 1-.2 1.6-.4 2-.2.5-.4.8-.8 1.2-.3.3-.7.6-1.2.8-.4.2-1 .3-2 .4-1 .1-1.3.1-3.7.1s-2.7 0-3.7-.1c-1-.1-1.6-.2-2-.4-.5-.2-.8-.4-1.2-.8-.3-.3-.6-.7-.8-1.2-.2-.4-.3-1-.4-2-.1-1-.1-1.3-.1-3.7s0-2.7.1-3.7c.1-1 .2-1.6.4-2 .2-.5.4-.8.8-1.2.3-.3.7-.6 1.2-.8.4-.2 1-.3 2-.4 1-.1 1.3-.1 3.7-.1m0-2.3c-2.5 0-2.8 0-3.8.1-1 .1-1.7.2-2.3.5-.6.2-1.2.6-1.7 1.1-.5.5-.8 1.1-1.1 1.7-.2.6-.4 1.3-.5 2.3-.1 1-.1 1.3-.1 3.8s0 2.8.1 3.8c.1 1 .2 1.7.5 2.3.2.6.6 1.2 1.1 1.7.5.5 1.1.8 1.7 1.1.6.2 1.3.4 2.3.5 1 .1 1.3.1 3.8.1s2.8 0 3.8-.1c1-.1 1.7-.2 2.3-.5.6-.2 1.2-.6 1.7-1.1.5-.5.8-1.1 1.1-1.7.2-.6.4-1.3.5-2.3.1-1 .1-1.3.1-3.8s0-2.8-.1-3.8c-.1-1-.2-1.7-.5-2.3-.2-.6-.6-1.2-1.1-1.7-.5-.5-1.1-.8-1.7-1.1-.6-.2-1.3-.4-2.3-.5-1-.1-1.3-.1-3.8-.1z"/>
+        <path d="M16 10.8c-2.9 0-5.2 2.4-5.2 5.2s2.4 5.2 5.2 5.2 5.2-2.4 5.2-5.2-2.3-5.2-5.2-5.2zm0 8.5c-1.8 0-3.3-1.5-3.3-3.3s1.5-3.3 3.3-3.3 3.3 1.5 3.3 3.3-1.5 3.3-3.3 3.3z"/>
+        <circle cx="21.5" cy="10.5" r="1.2"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    const state = {};
+    
+    function showSlide(id, idx) {
+      const slider = document.getElementById(id);
+      if (!slider) return;
+      const slides = slider.querySelectorAll('.slide');
+      if (!slides.length) return;
+      const total = slides.length;
+      const current = (idx + total) % total;
+      state[id] = current;
+      slider.querySelector('.slides').style.transform = `translateX(-${current*100}%)`;
+      const dots = slider.querySelectorAll('.dot');
+      dots.forEach((d,i)=>d.classList.toggle('active', i===current));
+    }
+
+    function nextSlide(id) { showSlide(id, (state[id]||0) + 1); }
+    function prevSlide(id) { showSlide(id, (state[id]||0) - 1); }
+
+    function createDots(id){
+      const slider = document.getElementById(id);
+      if(!slider) return;
+      const slides = slider.querySelectorAll('.slide');
+      const dotsContainer = slider.querySelector(`#dots-${id}`) || slider.querySelector('.dots');
+      slides.forEach((_,i)=>{
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.addEventListener('click', ()=>showSlide(id,i));
+        dotsContainer.appendChild(dot);
+      });
+      showSlide(id,0);
+    }
+
+    function autoPlay(id){
+      nextSlide(id);
+      setTimeout(()=>autoPlay(id),4000);
+    }
+
+    window.onload = ()=>{
+      ['sliderEventos','sliderPascuas'].forEach(s=>{
+        createDots(s);
+        autoPlay(s);
+      });
+    }
+  </script>
+
+</body>
+</html>
